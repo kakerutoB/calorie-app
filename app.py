@@ -1,7 +1,14 @@
 from flask import Flask, render_template, request
 import csv
 
-app = Flask(__name__)
+from flask import Flask
+
+app = Flask(
+    __name__,
+    static_folder="static",
+    static_url_path="/static"
+)
+
 
 def load_csv(path, key, value):
     data = {}
