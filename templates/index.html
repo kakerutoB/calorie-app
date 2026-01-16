@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>残りカロリー計算アプリ</title>
+<meta name="description" content="今日食べた料理から残りカロリーを計算し、食べられる料理と作り方を提案します">
+</head>
+<body>
+<h1>残りカロリー計算</h1>
+
+<form method="post">
+性別（任意）
+<select name="gender">
+<option value="">未選択</option>
+<option value="male">男性</option>
+<option value="female">女性</option>
+</select><br>
+
+年齢（任意）
+<input type="number" name="age"><br>
+
+今日食べた料理（カンマ区切り）
+<input type="text" name="eaten"><br>
+
+<button>計算</button>
+</form>
+
+{% if data %}
+<p>推奨摂取：{{ data.recommended }} kcal</p>
+<p>摂取済：{{ data.eaten }} kcal</p>
+<p>残り：{{ data.remain }} kcal</p>
+
+<h2>おすすめ料理</h2>
+{% for f in data.foods %}
+<h3>{{ f.name }}（{{ f.calorie }}kcal）</h3>
+<p style="white-space: pre-line;">{{ f.recipe }}</p>
+{% endfor %}
+{% endif %}
+
+<p><a href="/about">このサイトについて</a></p>
+</body>
+</html>
