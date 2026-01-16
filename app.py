@@ -9,6 +9,11 @@ app = Flask(
     static_url_path="/static"
 )
 
+from flask import send_from_directory
+
+@app.route("/google1b16542a751c4bae.html")
+def google_verify():
+    return send_from_directory("static", "google1b16542a751c4bae.html")
 
 def load_csv(path, key, value):
     data = {}
