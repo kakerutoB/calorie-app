@@ -1,0 +1,66 @@
+body {
+  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
+  background: #fff3e0; /* 薄いオレンジ */
+  margin: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  display: flex;
+  gap: 20px;
+}
+
+/* メイン画面 */
+.main {
+  flex: 3;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+/* 対応料理一覧 */
+.sidebar {
+  flex: 1;
+  background: #fff8e1;
+  padding: 20px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+h1 {
+  color: #e65100;
+  text-align: center;
+}
+
+button {
+  background: #fb8c00;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f57c00;
+}
+
+.food-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.food-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid #ffe0b2;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+}

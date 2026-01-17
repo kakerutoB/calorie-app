@@ -2,43 +2,44 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>残りカロリー計算アプリ</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>カロリー計算＆レシピ提案アプリ | calorie-app</title>
+
+<meta name="description"
+      content="食べた料理から残り摂取可能カロリーを計算し、作れるおすすめレシピを提案する無料Webアプリです。ログイン不要。">
 <!-- Google Search Console -->
 <meta name="google-site-verification" content="79zKV0C5W5ROOOKnsQu73bwHSDutwfesJrJrtUUt1Lo" />
 <meta name="description" content="今日食べた料理から残りカロリーを計算し、食べられる料理と作り方を提案します">
 </head>
 <body>
-<h1>残りカロリー計算</h1>
+  <div class="container">
 
-<form method="post">
-性別（任意）
-<select name="gender">
-<option value="">未選択</option>
-<option value="male">男性</option>
-<option value="female">女性</option>
-</select><br>
+    <h1>カロリー計算＆レシピ提案</h1>
 
-年齢（任意）
-<input type="number" name="age"><br>
+    <form method="post">
+      <label>性別（任意）</label>
+      <select name="gender">
+        <option value="">未選択</option>
+        <option value="male">男性</option>
+        <option value="female">女性</option>
+      </select>
 
-今日食べた料理（カンマ区切り）
-<input type="text" name="eaten"><br>
+      <label>年齢（任意）</label>
+      <input type="number" name="age">
 
-<button>計算</button>
-</form>
+      <label>今日食べた料理（カンマ区切り）</label>
+      <textarea name="foods" rows="3"></textarea>
 
-{% if data %}
-<p>推奨摂取：{{ data.recommended }} kcal</p>
-<p>摂取済：{{ data.eaten }} kcal</p>
-<p>残り：{{ data.remain }} kcal</p>
+      <button type="submit">計算する</button>
+    </form>
 
-<h2>おすすめ料理</h2>
-{% for f in data.foods %}
-<h3>{{ f.name }}（{{ f.calorie }}kcal）</h3>
-<p style="white-space: pre-line;">{{ f.recipe }}</p>
-{% endfor %}
-{% endif %}
+    {% if result %}
+      <div class="result">
+        {{ result | safe }}
+      </div>
+    {% endif %}
 
+  </div>
 <p><a href="/about">このサイトについて</a></p>
 </body>
 </html>
