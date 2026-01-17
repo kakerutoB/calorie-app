@@ -1,45 +1,104 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<title>カロリー計算＆レシピ提案アプリ | calorie-app</title>
+  <meta charset="UTF-8">
 
-<meta name="description"
-      content="食べた料理から残り摂取可能カロリーを計算し、作れるおすすめレシピを提案する無料Webアプリです。ログイン不要。">
-<!-- Google Search Console -->
-<meta name="google-site-verification" content="79zKV0C5W5ROOOKnsQu73bwHSDutwfesJrJrtUUt1Lo" />
-<meta name="description" content="今日食べた料理から残りカロリーを計算し、食べられる料理と作り方を提案します">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- タイトル & SEO -->
+  <title>カロリー計算＆レシピ提案アプリ | calorie-app</title>
+  <meta name="description"
+        content="食べた料理から残り摂取可能カロリーを計算し、食べられる料理とレシピを提案する無料Webアプリです。ログイン不要。">
+
+  <!-- Google Search Console -->
+  <meta name="google-site-verification"
+        content="79zKV0C5W5ROOOKnsQu73bwHSDutwfesJrJrtUUt1Lo" />
+
+  <!-- スマホ対応 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
+<script>
+function addFood(foodName) {
+  const textarea = document.getElementById("foods");
+  if (!textarea.value) {
+    textarea.value = foodName;
+  } else {
+    textarea.value += ", " + foodName;
+  }
+}
+</script>
+
 <body>
   <div class="container">
 
-    <h1>カロリー計算＆レシピ提案</h1>
+    <!-- メイン -->
+    <div class="main">
+      <h1>カロリー計算＆レシピ提案</h1>
 
-    <form method="post">
-      <label>性別（任意）</label>
-      <select name="gender">
-        <option value="">未選択</option>
-        <option value="male">男性</option>
-        <option value="female">女性</option>
-      </select>
+      <form method="post">
 
-      <label>年齢（任意）</label>
-      <input type="number" name="age">
+        <label for="gender">性別（任意）</label>
+        <select name="gender" id="gender">
+          <option value="">未選択</option>
+          <option value="male">男性</option>
+          <option value="female">女性</option>
+        </select>
 
-      <label>今日食べた料理（カンマ区切り）</label>
-      <textarea name="foods" rows="3"></textarea>
+        <label for="age">年齢（任意）</label>
+        <input type="number" name="age" id="age" placeholder="例：25">
 
-      <button type="submit">計算する</button>
-    </form>
+        <label for="foods">今日食べた料理（カンマ区切り）</label>
+        <textarea name="foods" id="foods" rows="4"
+                  placeholder="例：カレー, ハンバーグ"></textarea>
 
-    {% if result %}
-      <div class="result">
-        {{ result | safe }}
-      </div>
-    {% endif %}
+        <button type="submit">計算する</button>
+      </form>
+
+      {% if data %}
+        <div class="result">
+          <p><strong>推奨摂取カロリー：</strong>{{ data.recommended }} kcal</p>
+          <p><strong>摂取済み：</strong>{{ data.eaten }} kcal</p>
+          <p><strong>残り：</strong>{{ data.remain }} kcal</p>
+
+          <hr>
+
+          <h3>食べられる料理</h3>
+          {% if data.foods %}
+            {% for f in data.foods %}
+              <p>
+                🍽 {{ f.name }}（{{ f.calorie }} kcal）
+                <a href="{{ f.url }}" target="_blank" class="recipe-button">
+                 レシピを見る
+                </a>
+              </p>
+            {% endfor %}
+          {% else %}
+            <p>条件に合う料理が見つかりませんでした。</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- サイドバー -->
+    <div class="sidebar">
+      <h3>対応している料理</h3>
+      <ul class="food-list">
+        {% for food in food_names %}
+          <li class="food-item" onclick="addFood('{{ food }}')">
+            {{ food }}
+          </li>
+
+        {% endfor %}
+      </ul>
+    </div>
 
   </div>
-<p><a href="/about">このサイトについて</a></p>
+
+  <p style="text-align:center; margin-top:20px;">
+    <a href="/about">このサイトについて</a>
+  </p>
 </body>
 </html>

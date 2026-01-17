@@ -2,65 +2,74 @@ body {
   font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
   background: #fff3e0; /* 薄いオレンジ */
   margin: 0;
+  font-size: 18px; /* 全体の文字を大きく */
 }
 
+/* レイアウト */
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 30px auto;
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 /* メイン画面 */
 .main {
   flex: 3;
   background: #ffffff;
-  padding: 30px;
-  border-radius: 14px;
+  padding: 32px;
+  border-radius: 16px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-/* 対応料理一覧 */
+/* サイドバー */
 .sidebar {
   flex: 1;
   background: #fff8e1;
   padding: 20px;
-  border-radius: 14px;
-  font-size: 14px;
+  border-radius: 16px;
 }
 
 h1 {
   color: #e65100;
   text-align: center;
+  font-size: 28px;
+  margin-bottom: 24px;
 }
 
+h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+/* フォーム */
+form label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+select,
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ボタン */
 button {
+  margin-top: 20px;
+  width: 100%;
   background: #fb8c00;
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #f57c00;
-}
-
-.food-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.food-list li {
-  padding: 4px 0;
-  border-bottom: 1px solid #ffe0b2;
-}
-
-@media (max-width: 600px) {
-  .container {
-    margin: 20px;
-    padding: 20px;
-  }
-}
+  padding: 16px;
