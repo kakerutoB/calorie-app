@@ -73,3 +73,69 @@ button {
   color: white;
   border: none;
   padding: 16px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f57c00;
+}
+
+/* 結果表示 */
+.result {
+  margin-top: 24px;
+  font-size: 18px;
+}
+
+/* Cookpad ボタン */
+.recipe-button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 18px;
+  background-color: #ff914d;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.recipe-button:hover {
+  opacity: 0.85;
+}
+
+/* 料理リスト */
+.food-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.food-item {
+  padding: 8px 4px;
+  border-bottom: 1px solid #ffe0b2;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.food-item:hover {
+  color: #e65100;
+  font-weight: bold;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    margin: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  body {
+    font-size: 17px;
+  }
+}
